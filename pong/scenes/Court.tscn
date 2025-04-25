@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://bu624o1jbt6is"]
+
+[ext_resource type="PackedScene" uid="uid://djskpyftr84h1" path="res://scenes/Paddle.tscn" id="1_sdvhn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdvhn"]
+size = Vector2(1930, 40)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(960, 540)
+metadata/_edit_lock_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(39.73, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="paddle" parent="." instance=ExtResource("1_sdvhn")]
+position = Vector2(0, 93)
+key_up = 87
+key_down = 83
+
+[node name="paddle2" parent="." instance=ExtResource("1_sdvhn")]
+position = Vector2(1882, 108)
+key_up = 4194320
+key_down = 4194322
+
+[node name="Wall" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall/StaticBody2D"]
+position = Vector2(956, 21.73)
+shape = SubResource("RectangleShape2D_sdvhn")
+
+[node name="ColorRect2" type="ColorRect" parent="Wall"]
+visible = false
+offset_right = 1920.0
+offset_bottom = 40.0
+
+[node name="Wall2" type="Node2D" parent="."]
+position = Vector2(0, 1040)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Wall2"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2/StaticBody2D"]
+position = Vector2(963.25, 21.73)
+shape = SubResource("RectangleShape2D_sdvhn")
+
+[node name="ColorRect2" type="ColorRect" parent="Wall2"]
+visible = false
+offset_right = 1920.0
+offset_bottom = 40.0
+
+[node name="Divider" type="Node2D" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="Divider"]
+offset_left = 960.0
+offset_right = 2040.0
+offset_bottom = 40.0
+rotation = 1.5708
