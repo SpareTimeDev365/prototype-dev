@@ -1,0 +1,108 @@
+[gd_scene load_steps=6 format=3 uid="uid://k7jme3tsmc2t"]
+
+[ext_resource type="Script" uid="uid://rdwqpjsngh43" path="res://scripts/paddle.gd" id="1_yqjtg"]
+[ext_resource type="Script" uid="uid://do3ubrkvn3r8n" path="res://scripts/ball.gd" id="2_yqjtg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
+size = Vector2(43, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(1930, 40.865)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yqjtg"]
+radius = 22.0
+
+[node name="Game" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+visible = false
+offset = Vector2(960, 540)
+metadata/_edit_lock_ = true
+
+[node name="background" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(39.73, 0)
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Divider" type="Node2D" parent="."]
+
+[node name="ColorRect2" type="ColorRect" parent="Divider"]
+offset_left = 960.0
+offset_right = 2040.0
+offset_bottom = 40.0
+rotation = 1.5708
+
+[node name="paddle" type="StaticBody2D" parent="."]
+position = Vector2(2, 177)
+script = ExtResource("1_yqjtg")
+move_speed = 500
+key_up = 87
+key_down = 83
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paddle"]
+position = Vector2(19.5, 120)
+shape = SubResource("RectangleShape2D_uwrxv")
+
+[node name="ColorRect" type="ColorRect" parent="paddle"]
+offset_right = 40.0
+offset_bottom = 240.0
+
+[node name="paddle2" type="StaticBody2D" parent="."]
+position = Vector2(1879, 165)
+script = ExtResource("1_yqjtg")
+move_speed = 500
+key_up = 4194320
+key_down = 4194322
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="paddle2"]
+position = Vector2(19.5, 120)
+shape = SubResource("RectangleShape2D_uwrxv")
+
+[node name="ColorRect" type="ColorRect" parent="paddle2"]
+offset_right = 40.0
+offset_bottom = 240.0
+
+[node name="top" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="top"]
+position = Vector2(956, 20.865)
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="ColorRect2" type="ColorRect" parent="top"]
+offset_right = 1920.0
+offset_bottom = 40.0
+
+[node name="bottom" type="StaticBody2D" parent="."]
+position = Vector2(0, 1040)
+disable_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bottom"]
+position = Vector2(963.25, 20.4325)
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="ColorRect3" type="ColorRect" parent="bottom"]
+offset_right = 1920.0
+offset_bottom = 40.0
+
+[node name="ball" type="RigidBody2D" parent="." node_paths=PackedStringArray("paddle1", "paddle2", "top", "bottom")]
+position = Vector2(842, 444)
+mass = 0.001
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("2_yqjtg")
+ball_speed = 35
+paddle1 = NodePath("../paddle")
+paddle2 = NodePath("../paddle2")
+top = NodePath("../top")
+bottom = NodePath("../bottom")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
+shape = SubResource("CircleShape2D_yqjtg")
+
+[connection signal="body_entered" from="ball" to="ball" method="_on_body_entered"]
