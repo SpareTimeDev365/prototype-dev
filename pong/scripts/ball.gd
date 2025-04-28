@@ -10,6 +10,7 @@ var init_rotation: float
 var circle_color: Color = Color(0.0, 1.0, 0.0)
 var circle_radius: float = 25.0
 var force := Vector2(0, 0)
+var direction = Vector2(5, 5).normalized()
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, circle_radius, circle_color)
@@ -18,27 +19,22 @@ func _draw() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	queue_redraw()
-	init_rotation = 0.0
-	force = Vector2(-ball_speed, -ball_speed)
-	apply_central_force(force)
-	# pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+# func _process(delta: float) -> void:
+# 	#print("force: ", force)
+# 	pass
 
 func _physics_process(delta):
+	linear_velocity = direction * ball_speed
 	pass
-	# rotation = init_rotation
-
-
+	
+# normal reflection of ball
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
-	var name = body.name
-	if (name == paddle1.name or name == paddle2.name):
-		force.x = -1 * force.x
-	elif (name == top.name or name == bottom.name):
-		force.y = -1 * force.y
-		
-	apply_central_force(force)
+	var node_name = body.name
+	if node_name == paddle1.name or node_name == paddle2.name:
+		direction = Vector2(-direction.x, direction.y)
+	elif node_name == top.name or node_name == bottom.name:
+		direction = Vector2(direction.x, -direction.y)
