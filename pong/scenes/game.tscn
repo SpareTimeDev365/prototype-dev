@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://k7jme3tsmc2t"]
+[gd_scene load_steps=8 format=3 uid="uid://k7jme3tsmc2t"]
 
 [ext_resource type="Script" uid="uid://byap8d5j1bnoy" path="res://scripts/game.gd" id="1_lbhrr"]
 [ext_resource type="Script" uid="uid://rdwqpjsngh43" path="res://scripts/paddle.gd" id="1_yqjtg"]
-[ext_resource type="Script" uid="uid://do3ubrkvn3r8n" path="res://scripts/ball.gd" id="2_yqjtg"]
 [ext_resource type="Script" uid="uid://dlsmdg4r0nv5i" path="res://scripts/point_area.gd" id="3_lnu2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
@@ -11,18 +10,15 @@ size = Vector2(43, 240)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
 size = Vector2(1920, 40.865)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_yqjtg"]
-radius = 22.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
 size = Vector2(45, 1073)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lbhrr"]
 font_size = 50
 
-[node name="Game" type="Node2D" node_paths=PackedStringArray("ball")]
+[node name="Game" type="Node2D"]
 script = ExtResource("1_lbhrr")
-ball = NodePath("ball")
+round_limit = 1
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -99,25 +95,9 @@ shape = SubResource("RectangleShape2D_yqjtg")
 offset_right = 1920.0
 offset_bottom = 40.0
 
-[node name="ball" type="RigidBody2D" parent="." node_paths=PackedStringArray("paddle1", "paddle2", "top", "bottom")]
-position = Vector2(842, 444)
-mass = 0.001
-gravity_scale = 0.0
-contact_monitor = true
-max_contacts_reported = 1
-script = ExtResource("2_yqjtg")
-ball_speed = 500
-paddle1 = NodePath("../paddle")
-paddle2 = NodePath("../paddle2")
-top = NodePath("../top")
-bottom = NodePath("../bottom")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ball"]
-shape = SubResource("CircleShape2D_yqjtg")
-
 [node name="pointArea" type="Area2D" parent="." node_paths=PackedStringArray("ball")]
 script = ExtResource("3_lnu2h")
-ball = NodePath("../ball")
+ball = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pointArea"]
 position = Vector2(-28.5, 536.5)
@@ -126,7 +106,7 @@ shape = SubResource("RectangleShape2D_lnu2h")
 [node name="pointArea2" type="Area2D" parent="." node_paths=PackedStringArray("ball")]
 position = Vector2(1981, 0)
 script = ExtResource("3_lnu2h")
-ball = NodePath("../ball")
+ball = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pointArea2"]
 position = Vector2(-28.5, 536.5)
@@ -157,6 +137,5 @@ vertical_alignment = 1
 [node name="origin" type="Node2D" parent="."]
 position = Vector2(944, 528)
 
-[connection signal="body_entered" from="ball" to="ball" method="_on_body_entered"]
 [connection signal="body_entered" from="pointArea" to="." method="_on_point_area_body_entered"]
 [connection signal="body_entered" from="pointArea2" to="." method="_on_point_area_2_body_entered"]
