@@ -1,10 +1,11 @@
 extends RigidBody2D
 
 @export var ball_speed: int
-@export var paddle1: StaticBody2D
-@export var paddle2: StaticBody2D
-@export var top: StaticBody2D
-@export var bottom: StaticBody2D
+
+@onready var paddle_1: StaticBody2D = $'../paddle'
+@onready var paddle_2: StaticBody2D = $'../paddle2'
+@onready var top: StaticBody2D = $'../top'
+@onready var bottom: StaticBody2D = $'../bottom'
 
 var init_rotation: float
 var circle_color: Color = Color(0.0, 1.0, 0.0)
@@ -34,7 +35,7 @@ func _physics_process(delta):
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
 	var node_name = body.name
-	if node_name == paddle1.name or node_name == paddle2.name:
+	if node_name == paddle_1.name or node_name == paddle_2.name:
 		direction = Vector2(-direction.x, direction.y)
 	elif node_name == top.name or node_name == bottom.name:
 		direction = Vector2(direction.x, -direction.y)
