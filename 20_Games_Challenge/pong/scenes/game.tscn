@@ -95,18 +95,16 @@ shape = SubResource("RectangleShape2D_yqjtg")
 offset_right = 1920.0
 offset_bottom = 40.0
 
-[node name="pointArea" type="Area2D" parent="." node_paths=PackedStringArray("ball")]
+[node name="pointArea" type="Area2D" parent="."]
 script = ExtResource("3_lnu2h")
-ball = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pointArea"]
 position = Vector2(-28.5, 536.5)
 shape = SubResource("RectangleShape2D_lnu2h")
 
-[node name="pointArea2" type="Area2D" parent="." node_paths=PackedStringArray("ball")]
+[node name="pointArea2" type="Area2D" parent="."]
 position = Vector2(1981, 0)
 script = ExtResource("3_lnu2h")
-ball = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="pointArea2"]
 position = Vector2(-28.5, 536.5)
