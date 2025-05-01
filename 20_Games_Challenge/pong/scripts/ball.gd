@@ -7,11 +7,9 @@ extends RigidBody2D
 @onready var top: StaticBody2D = $'../top'
 @onready var bottom: StaticBody2D = $'../bottom'
 
-var init_rotation: float
 var circle_color: Color = Color(0.0, 1.0, 0.0)
 var circle_radius: float = 25.0
-var force := Vector2(0, 0)
-var direction = Vector2(5, 5).normalized()
+var direction
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, circle_radius, circle_color)
@@ -21,17 +19,14 @@ func _draw() -> void:
 func _ready() -> void:
 	queue_redraw()
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(delta: float) -> void:
-# 	#print("force: ", force)
-# 	pass
+	## NOTE: ternary condition in GDScript, decided left or right
+	var direction_x: float = 1.0 if (randi() % 2 == 0) else -1.0
+	direction = Vector2(direction_x, randfn(0.3, 1.0)).normalized()
 
 func _physics_process(delta):
 	linear_velocity = direction * ball_speed
-	pass
 	
-# normal reflection of ball
+## normal reflection of ball
 func _on_body_entered(body: Node) -> void:
 	print(body.name)
 	var node_name = body.name
