@@ -6,9 +6,12 @@ extends Node2D
 
 @onready var p1_score_text: Label = $p1ScoreText
 @onready var p2_score_text: Label = $p2ScoreText
+@onready var paddle: StaticBody2D = $paddle
+@onready var paddle_2: StaticBody2D = $paddle2
 @onready var origin: Node2D = $origin
 @onready var paused_menu: Panel = $pausedMenu
 @onready var start_menu: Panel = $startMenu
+@onready var audio_player_1: AudioStreamPlayer2D = $AudioPlayer1
 
 var ball
 var p1_score := 0
@@ -45,6 +48,10 @@ func _input(event: InputEvent) -> void:
 		
 ## Round Start Actions: Reset ball when the current_round start
 func round_start():
+	# NOTE: reset paddle position when round_start
+	paddle.position.y = origin.position.y
+	paddle_2.position.y = origin.position.y
+	
 	current_round += 1
 	ball = preload("res://scenes/ball.tscn").instantiate()
 	ball.position = origin.position
@@ -63,6 +70,7 @@ func _on_point_area_body_entered(body: Node2D) -> void:
 	if (body.name == ball.name and round_over == false):
 		print("p2 player score")
 		p2_score += 1
+		audio_player_1.playing = true
 		round_end()
 
 ## Singnal when ball touch right side
@@ -70,12 +78,14 @@ func _on_point_area_2_body_entered(body: Node2D) -> void:
 	if (body.name == ball.name and round_over == false):
 		print("p1 player score")
 		p1_score += 1
+		audio_player_1.playing = true
 		round_end()
 
 ## Signal from paused reset button pressed
 func _on_reset_btn_pressed() -> void:
 	p1_score = 0
 	p2_score = 0
+	
 	round_end()
 	current_round = 0
 	round_start()
