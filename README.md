@@ -22,4 +22,7 @@ Someone recommended me to take the 20 Games Challenges, and I think its a great 
 - [Kenney - free game assets](https://kenney.nl/)
 
 ## Assets
-- [DigitalAudio](https://kenney.nl/assets/digital-audio)
+- Audio
+  - [DigitalAudio](https://kenney.nl/assets/digital-audio)
+- Fonts
+  - [Megamax Jonathan Too Font (Pixel Fonts)](https://www.fontspace.com/megamax-jonathan-too-font-f124011)
