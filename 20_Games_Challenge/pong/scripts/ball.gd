@@ -18,7 +18,7 @@ func _draw() -> void:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	queue_redraw()
-
+	print("ball ready")
 	## NOTE: ternary condition in GDScript, decided left or right
 	var direction_x: float = 1.0 if (randi() % 2 == 0) else -1.0
 	direction = Vector2(direction_x, randfn(0.3, 1.0)).normalized()
