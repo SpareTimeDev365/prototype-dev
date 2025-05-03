@@ -4,23 +4,24 @@ extends Panel
 @onready var quit_btn: Button = $quitBtn
 @onready var left_btn: Button = $HBoxContainer/leftBtn
 @onready var right_btn: Button = $HBoxContainer/rightBtn
-@onready var round_limit_label: RichTextLabel = $HBoxContainer/roundLimitLabel
+# @onready var round_limit_label: RichTextLabel = $HBoxContainer/roundLimitLabel
+@onready var target_point_label: RichTextLabel = $HBoxContainer/targetPointLabel
 
-var max_round_limit: int
-var init_round_limit: int = 5
-var round_limit: int
+var max_target_point: int
+var init_target_point: int = 5
+var target_point: int
 var game_start: bool = false
 var game_controller: Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	game_controller = get_parent()
-	max_round_limit = game_controller.max_round_limit
-	init_round_limit = game_controller.init_round_limit
+	max_target_point = game_controller.max_target_point
+	init_target_point = game_controller.init_target_point
 
-	# print("max_round_limit ", max_round_limit)
-	# print("init_round_limit ", init_round_limit)
-	round_limit = init_round_limit
+	# print("max_target_point ", max_target_point)
+	# print("init_target_point ", init_target_point)
+	target_point = init_target_point
 	
 	## NOTE: connect the btn signal
 	left_btn.pressed.connect(game_controller._change_round_limit.bind(-1))
@@ -30,5 +31,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	round_limit = game_controller.round_limit
-	round_limit_label.text = str(round_limit) + " round"
+	target_point = game_controller.target_point
+
+	if target_point == 1:
+		target_point_label.text = str(target_point) + " point"
+	else:
+		target_point_label.text = str(target_point) + " points"

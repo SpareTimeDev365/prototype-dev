@@ -104,12 +104,12 @@ theme_override_fonts/font = ExtResource("1_ouf4f")
 theme_override_font_sizes/font_size = 100
 text = "-"
 
-[node name="roundLimitLabel" type="RichTextLabel" parent="HBoxContainer"]
+[node name="targetPointLabel" type="RichTextLabel" parent="HBoxContainer"]
 custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 theme_override_fonts/normal_font = ExtResource("1_ouf4f")
 theme_override_font_sizes/normal_font_size = 50
-text = "Round"
+text = "points"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1

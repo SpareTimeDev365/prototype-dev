@@ -162,6 +162,7 @@ vertical_alignment = 1
 position = Vector2(960.96, 528)
 
 [node name="pausedMenu" type="Panel" parent="."]
+visible = false
 z_index = 1
 offset_right = 1920.0
 offset_bottom = 1080.0
@@ -246,7 +247,110 @@ visible = false
 stream = ExtResource("6_p57ef")
 volume_db = 5.0
 
+[node name="gameOverMenu" type="Panel" parent="."]
+visible = false
+z_index = 1
+offset_right = 1920.0
+offset_bottom = 1080.0
+scale = Vector2(0.65, 0.65)
+pivot_offset = Vector2(960, 540)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="gameOverMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.192157, 0.192157, 0.192157, 0.541176)
+
+[node name="menuBtn" type="Button" parent="gameOverMenu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 141.539
+offset_top = 213.846
+offset_right = 725.539
+offset_bottom = 320.846
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lbhrr")
+theme_override_font_sizes/font_size = 72
+action_mode = 0
+text = "menu
+"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="gameOverMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -346.154
+offset_right = 500.0
+offset_bottom = -72.1538
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0.486275, 0.741176, 1)
+theme_override_constants/outline_size = 30
+theme_override_fonts/normal_font = ExtResource("4_lbhrr")
+theme_override_font_sizes/normal_font_size = 150
+text = "Game Over"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="resetBtn2" type="Button" parent="gameOverMenu"]
+z_index = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -673.846
+offset_top = 213.846
+offset_right = -89.8461
+offset_bottom = 320.846
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_lbhrr")
+theme_override_font_sizes/font_size = 72
+action_mode = 0
+text = "Replay
+"
+
+[node name="resultLabel" type="RichTextLabel" parent="gameOverMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -66.1538
+offset_right = 500.0
+offset_bottom = 207.846
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("4_lbhrr")
+theme_override_font_sizes/normal_font_size = 80
+text = "Player 1 win"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="body_entered" from="pointArea" to="." method="_on_point_area_body_entered"]
 [connection signal="body_entered" from="pointArea2" to="." method="_on_point_area_2_body_entered"]
 [connection signal="pressed" from="pausedMenu/menuBtn" to="." method="_on_menu_btn_pressed"]
 [connection signal="pressed" from="pausedMenu/resetBtn2" to="." method="_on_reset_btn_pressed"]
+[connection signal="pressed" from="gameOverMenu/menuBtn" to="." method="_on_menu_btn_pressed"]
+[connection signal="pressed" from="gameOverMenu/resetBtn2" to="." method="_on_reset_btn_pressed"]

@@ -1,8 +1,8 @@
 extends Node2D
 
 ## restrict the round limit that the user can set
-@export var max_round_limit: int = 10
-@export var init_round_limit: int = 3
+@export var max_target_point: int = 10
+@export var init_target_point: int = 3
 
 @onready var p1_score_text: Label = $p1ScoreText
 @onready var p2_score_text: Label = $p2ScoreText
@@ -11,22 +11,25 @@ extends Node2D
 @onready var origin: Node2D = $origin
 @onready var paused_menu: Panel = $pausedMenu
 @onready var start_menu: Panel = $startMenu
+@onready var game_over_menu: Panel = $gameOverMenu
 @onready var audio_player_1: AudioStreamPlayer2D = $AudioPlayer1
 
 var ball
 var p1_score := 0
 var p2_score := 0
 var current_round := 0
-var round_limit: int
+var target_point: int
 var round_over := false
 var game_start: bool = false
+var resultTextLabel: RichTextLabel
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	round_limit = init_round_limit
+	target_point = init_target_point
 	start_menu.visible = true
 	paused_menu.visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	resultTextLabel = game_over_menu.find_child("resultLabel")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +37,15 @@ func _process(delta: float) -> void:
 	p1_score_text.text = str(p1_score)
 	p2_score_text.text = str(p2_score)
 
-	if current_round < round_limit and round_over and game_start:
+	if p1_score == target_point or p2_score == target_point:
+		game_over_menu.visible = true
+		resultTextLabel = game_over_menu.find_child("resultLabel")
+		print(resultTextLabel)
+		if p1_score > p2_score:
+			resultTextLabel.text = "Player 1 win !"
+		else:
+			resultTextLabel.text = "Player 2 win !"
+	elif round_over and game_start:
 		round_start()
 		
 ## Handle Game Input event (override)	
@@ -57,6 +68,7 @@ func round_start():
 	ball.position = origin.position
 	add_child(ball)
 	round_over = false
+	game_over_menu.visible = false
 
 ## Round End Actions
 func round_end():
@@ -95,7 +107,9 @@ func _on_menu_btn_pressed() -> void:
 	round_end()
 	p1_score = 0
 	p2_score = 0
+	current_round = 0
 	paused_menu.visible = false
+	game_over_menu.visible = false
 	start_menu.visible = true
 	game_start = false
 	get_tree().paused = false
@@ -103,8 +117,8 @@ func _on_menu_btn_pressed() -> void:
 ## Signal to change the game round limit
 func _change_round_limit(count: int):
 	# print("btn pressed")
-	round_limit += count
-	round_limit = clampi(round_limit, 1, 10)
+	target_point += count
+	target_point = clampi(target_point, 1, 10)
 
 ## Game Start Signal
 func _start_game():
