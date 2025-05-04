@@ -73,7 +73,9 @@ func round_start():
 ## Round End Actions
 func round_end():
 	print("Round:", current_round, " p1: ", p1_score, " ,p2: ", p2_score)
-	remove_child(ball)
+	# remove_child(ball)
+	if ball != null:
+		ball.queue_free()
 	round_over = true
 	
 
@@ -130,4 +132,12 @@ func _start_game():
 ## Game Quit Signal
 func _quit_game():
 	print("quit")
-	get_tree().quit()
+	if OS.has_feature("web"):
+		# NOTE: workaround on Web Quit, straight calling close() or window.close() will be block
+		## Method 1: close window workaround
+		#JavaScriptBridge.eval('window.open("about:blank", "_self");', true)
+		#JavaScriptBridge.eval("window.close();", true)
+		## Method 2: go to previous page
+		JavaScriptBridge.eval("history.back();", true)
+	else:
+		get_tree().quit()

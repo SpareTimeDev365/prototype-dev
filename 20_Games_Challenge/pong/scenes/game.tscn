@@ -73,7 +73,7 @@ size_flags_vertical = 4
 
 [node name="paddle2" type="StaticBody2D" parent="."]
 process_mode = 1
-position = Vector2(1887, 408)
+position = Vector2(1896, 408)
 script = ExtResource("1_yqjtg")
 move_speed = 500
 key_up = 4194320
