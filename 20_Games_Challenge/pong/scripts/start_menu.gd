@@ -4,7 +4,6 @@ extends Panel
 @onready var quit_btn: Button = $quitBtn
 @onready var left_btn: Button = $HBoxContainer/leftBtn
 @onready var right_btn: Button = $HBoxContainer/rightBtn
-# @onready var round_limit_label: RichTextLabel = $HBoxContainer/roundLimitLabel
 @onready var target_point_label: RichTextLabel = $HBoxContainer/targetPointLabel
 
 var max_target_point: int
@@ -19,8 +18,6 @@ func _ready() -> void:
 	max_target_point = game_controller.max_target_point
 	init_target_point = game_controller.init_target_point
 
-	# print("max_target_point ", max_target_point)
-	# print("init_target_point ", init_target_point)
 	target_point = init_target_point
 	
 	## NOTE: connect the btn signal

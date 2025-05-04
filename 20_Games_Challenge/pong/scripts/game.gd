@@ -40,7 +40,7 @@ func _process(delta: float) -> void:
 	if p1_score == target_point or p2_score == target_point:
 		game_over_menu.visible = true
 		resultTextLabel = game_over_menu.find_child("resultLabel")
-		print(resultTextLabel)
+
 		if p1_score > p2_score:
 			resultTextLabel.text = "Player 1 win !"
 		else:
@@ -116,7 +116,6 @@ func _on_menu_btn_pressed() -> void:
 
 ## Signal to change the game round limit
 func _change_round_limit(count: int):
-	# print("btn pressed")
 	target_point += count
 	target_point = clampi(target_point, 1, 10)
 

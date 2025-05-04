@@ -12,7 +12,7 @@ extends RigidBody2D
 var circle_color: Color = Color(0.0, 1.0, 0.0)
 var circle_radius: float = 25.0
 var direction
-var bounce_count:int
+var bounce_count: int
 
 func _draw() -> void:
 	draw_circle(Vector2.ZERO, circle_radius, circle_color)
@@ -26,9 +26,6 @@ func _ready() -> void:
 	## NOTE: ternary condition in GDScript, decided left or right
 	var direction_x: float = 1.0 if (randi() % 2 == 0) else -1.0
 	direction = Vector2(direction_x, randfn(0.3, 1.0)).normalized()
-
-func _process(delta: float) -> void:
-	pass
 
 func _physics_process(delta):
 	linear_velocity = direction * ball_speed
